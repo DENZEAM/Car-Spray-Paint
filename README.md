@@ -1,17 +1,17 @@
 # One Dev | Car-Spray-Paint
 One Dev | Car Spray Paint
-## Preview : https://www.youtube.com/watch?v=_HmCaeVZ3JA
+## Preview: https://www.youtube.com/watch?v=_HmCaeVZ3JA
 
-- Script Permettant de changer la couleur d'un véhicule 
+- Script that allows you to change the color of a vehicle
 
-- Script en Rage UI V2
+- Script in Rage UI V2
 
-- Script Full Configurable 
+- Fully configurable script
 
-- Script sous ESX
+- ESX script
 
-- Script possédant des logs
+- Script with logs
 
--  Système d'anticheat  intégré 
+- Integrated anti-cheat system
 
--  Système de blacklist véhicule intégré  
+- Integrated vehicle blacklist system
