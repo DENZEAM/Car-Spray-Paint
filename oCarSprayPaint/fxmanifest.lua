@@ -1,14 +1,24 @@
 fx_version 'cerulean'
 game 'gta5'
 
-name "dBombeDePeinture"
-description "Bombe de peinture script"
+name "oCarSprayPaint"
+description "CarSprayPaint"
 author "1"
 version "1"
 
 shared_scripts {
-	'shared/*.lua'
+    'shared/*.lua',
+    'locales/init.lua',
+    'locales/en.lua',
+    'locales/fr.lua',
+    'locales/es.lua',
+    'locales/pt.lua',
+    'locales/ru.lua',
+    'locales/de.lua'
+	
 }
+
+shared_script '@es_extended/imports.lua'
 
 client_scripts {
 	'RageUI/RMenu.lua',
@@ -25,5 +35,6 @@ client_scripts {
 
 server_scripts {
 	'server/*.lua',
+    
     "webhook.lua"
 }

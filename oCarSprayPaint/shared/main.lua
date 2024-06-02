@@ -1,18 +1,20 @@
+
 ConfigDBP = {}
 
+ConfigDBP.Locale = 'pt' -- Change this to 'fr', 'es', 'pt', 'it', 'ru', 'de' as needed
 
-ConfigDBP.ColorName = {"Rouge","Noir","Vert"} --- Nom des couleur afficher dans le menu merci de suivre le paterne 
+ConfigDBP.ColorName = {"Red", "Black", "Green"} --- Color names displayed in the menu, please follow the pattern
 
--- [ATTENTION] Tout doit être synchroniser / dans l'ordre (comme le paterne) [ATTENTION]
-ConfigDBP.ColorId = { --- l'id de la couleur voir https://wiki.rage.mp/index.php?title=Vehicle_Colors 
-    ["Rouge"] = 30, 
-    ["Noir"] = 40,
-    ["Vert"] = 50
+-- [ATTENTION] Everything must be synchronized / in order (following the pattern) [ATTENTION]
+ConfigDBP.ColorId = { --- the color id, see https://wiki.rage.mp/index.php?title=Vehicle_Colors 
+    ["Red"] = 30, 
+    ["Black"] = 40,
+    ["Green"] = 50
 }
---- Pour les véhicules vanilla le nom doit être en full maj ex : SULTAN, pour les véhicules modée le nom doit être exactement pareille que dans le .ytdd ex : LSPDstanier
+--- For vanilla vehicles, the name must be in full uppercase e.g. SULTAN, for modded vehicles, the name must be exactly the same as in the .ytdd file e.g. LSPDstanier
 ConfigDBP.BlackListVehicle = {
     ["SULTAN"] = true,
     ["LSPDstanier"] = true,
 }
 
-ConfigDBP.Time = 10 -- le temps de la barre de chargement avant la coloration (en seconde)
+ConfigDBP.Time = 10 -- the time of the loading bar before coloring (in seconds)

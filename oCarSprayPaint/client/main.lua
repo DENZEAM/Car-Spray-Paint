@@ -1,24 +1,36 @@
-ESX = nil
-Citizen.CreateThread(function()
-    while ESX == nil do
-        TriggerEvent('esx:getSharedObject', function(obj) 
-			ESX = obj 
-		end)
-        Citizen.Wait(100)
-    end
-    while ESX.GetPlayerData().job == nil do 
-        Citizen.Wait(100)
-    end
-    ESX.PlayerData = ESX.GetPlayerData()
-end)
+-- ESX = nil
+-- Citizen.CreateThread(function()
+--     while ESX == nil do
+--         TriggerEvent('esx:getSharedObject', function(obj) 
+-- 			ESX = obj 
+-- 		end)
+--         Citizen.Wait(100)
+--     end
+--     while ESX.GetPlayerData().job == nil do 
+--         Citizen.Wait(100)
+--     end
+--     ESX.PlayerData = ESX.GetPlayerData()
+-- end)
+
 local LoadPoint = {".", "..", "...", ""}
 local colorselected = ConfigDBP.ColorId[ConfigDBP.ColorName[1]]
 local ouiounon = 0
 local customindex = 1
-local dmbombe = RageUI.CreateMenu("", "Menu Customisation de couleur", 0, 0, 'DENMENU', 'shopui_title_carmod2')
+
+function _U(entry)
+    local locale = ConfigDBP.Locale
+    if Locales[locale] and Locales[locale][entry] then
+        return Locales[locale][entry]
+    else
+        return 'Translation [' .. locale .. '][' .. entry .. '] does not exist'
+    end
+end
+
+local dmbombe = RageUI.CreateMenu("", _U('welcome'), 0, 0, 'DENMENU', 'shopui_title_carmod2')
 dmbombe.Closed = function()
     open = false
 end
+
 function dbombe()
 	if open then
 		open = false
@@ -41,41 +53,36 @@ function dbombe()
                 end
                 if dst > 5 then 
                     RageUI.CloseAll()
-                    ESX.ShowNotification("~r~ Aucun véhicule a proximite")
+                    ESX.ShowNotification(_U('no_vehicle'))
                     return
                 end
 				RageUI.IsVisible(dmbombe,function() 
-                    RageUI.Separator("Véhicule sélectionné : "..nameveh)
-                    RageUI.Separator("Plaque du véhicule sélectionné : "..plate)
+                    RageUI.Separator(_U('selected_vehicle') .. nameveh)
+                    RageUI.Separator(_U('vehicle_plate') .. plate)
                     if ouiounon == 1 then
-                        RageUI.Separator("Possibilité de custom ~g~OUI")
+                        RageUI.Separator(_U('custom_possible'))
                     else
-                        RageUI.Separator("Possibilité de custom ~r~NON") 
+                        RageUI.Separator(_U('custom_not_possible'))
                     end
                     RageUI.List("Couleur", ConfigDBP.ColorName, customindex, nil, {}, ouiounon == 1,{
                         onListChange = function(index)
                             customindex = index
                             colorselected = ConfigDBP.ColorId[ConfigDBP.ColorName[index]]
-                           
-                            
                         end
                     })
-                    RageUI.Button("Confirmer la modification", nil, {RightBadge = RageUI.BadgeStyle.Tick}, ouiounon == 1, {
+                    RageUI.Button(_U('confirm_modification'), nil, {RightBadge = RageUI.BadgeStyle.Tick}, ouiounon == 1, {
 						onSelected = function()
                             RageUI.CloseAll()
 							vehiclemodif(veh,colorselected,colorselected)
-                            
-
 						end
 					})
-                        
-                    
 				end)
 				Citizen.Wait(1)
 			end
 		end)
 	end
 end
+
 function DrawTextProgress(Text, Text3, Taille, Text2, Font, Justi, havetext)
     SetTextFont(Font)
     SetTextScale(Taille, Taille)
@@ -106,26 +113,28 @@ function AddProgressBar(Text, r, g, b, a, Timing)
                 DrawRect(0.5, 0.940, 0.15, 0.03, 0, 0, 0, 100)
                 local y, endroit = 0.15 - 0.0025, 0.03 - 0.005
                 local chance = math.max(0, math.min(y, y * Timing1))
-                DrawRect((0.5 - y / 2) + chance / 2, 0.940, chance, endroit, r, g, b, a) -- 0,155,255,125
-                DrawTextProgress(0.5, 0.940 - 0.0125, 0.3, (Text or "Action en cours") .. Point, 0, 0, false)
+                DrawRect((0.5 - y / 2) + chance / 2, 0.940, chance, endroit, r, g, b, a)
+                DrawTextProgress(0.5, 0.940 - 0.0125, 0.3, (Text or _U('action_in_progress')) .. Point, 0, 0, false)
             end
             DeleteProgressBar()
         end)
     end
 end
+
 function DeleteProgressBar() 
     ActiveProgressBar = nil
 end
+
 RegisterNetEvent("startMenu")
 AddEventHandler("startMenu", function()
     dbombe()
-    
 end)
-function vehiclemodif(vehicle,color1,color2)
+
+function vehiclemodif(vehicle, color1, color2)
     TriggerServerEvent("DEN:RemoveItem")
-    AddProgressBar("Coloration en cours",42, 37, 40, 0.74,ConfigDBP.Time*1000)
-    TaskStartScenarioInPlace(PlayerPedId(),'CODE_HUMAN_MEDIC_KNEEL',-1,false);
-    Wait(ConfigDBP.Time*1000)
+    AddProgressBar(_U('action_in_progress'), 42, 37, 40, 0.74, ConfigDBP.Time * 1000)
+    TaskStartScenarioInPlace(PlayerPedId(), 'CODE_HUMAN_MEDIC_KNEEL', -1, false)
+    Wait(ConfigDBP.Time * 1000)
     ClearPedTasks(PlayerPedId())
     ESX.Game.SetVehicleProperties(vehicle, {
         color1 = color1,
