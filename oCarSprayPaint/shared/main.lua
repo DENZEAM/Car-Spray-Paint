@@ -1,7 +1,7 @@
 
 ConfigDBP = {}
 
-ConfigDBP.Locale = 'pt' -- Change this to 'fr', 'es', 'pt', 'it', 'ru', 'de' as needed
+ConfigDBP.Locale = 'en' -- Change this to 'en' , 'fr', 'es', 'pt', 'it', 'ru', 'de' as needed
 
 ConfigDBP.ColorName = {"Red", "Black", "Green"} --- Color names displayed in the menu, please follow the pattern
 
@@ -15,6 +15,7 @@ ConfigDBP.ColorId = { --- the color id, see https://wiki.rage.mp/index.php?title
 ConfigDBP.BlackListVehicle = {
     ["SULTAN"] = true,
     ["LSPDstanier"] = true,
+    ["LSSDstanier"] = true,
 }
 
 ConfigDBP.Time = 10 -- the time of the loading bar before coloring (in seconds)

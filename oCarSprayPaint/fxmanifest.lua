@@ -34,7 +34,6 @@ client_scripts {
 }
 
 server_scripts {
+    "webhook.lua",
 	'server/*.lua',
-    
-    "webhook.lua"
 }
