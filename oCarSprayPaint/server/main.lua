@@ -21,10 +21,10 @@ AddEventHandler("DEN:RemoveItem", function()
     if xPlayer.getInventoryItem('paint_spray').count >= 1 then
         xPlayer.removeInventoryItem('paint_spray', 1)
         xPlayer.showNotification(_U('used_spray'))
-        PeintureLogs(_U('log_title_use'), "Player " .. xPlayer.name .. " **(" .. xPlayer.identifier .. ")** " .. _U('log_used_spray'), ConfigDBP.Webhook.UsePeinture, 16711680)
+        PeintureLogs(_U('log_title_use'), "Player " .. xPlayer.name .. " **(" .. xPlayer.identifier .. ")** " .. _U('log_used_spray'), ConfigWebhook.UsePeinture, 16711680)
     else
         xPlayer.showNotification(_U('no_spray'))
-        PeintureLogs(_U('log_title_cheat'), "Player " .. xPlayer.name .. " **(" .. xPlayer.identifier .. ")** " .. _U('log_tried_cheat'), ConfigDBP.Webhook.Anticheat, 16711680)
+        PeintureLogs(_U('log_title_cheat'), "Player " .. xPlayer.name .. " **(" .. xPlayer.identifier .. ")** " .. _U('log_tried_cheat'), ConfigWebhook.Anticheat, 16711680)
         DropPlayer(src, "Car Spray Paint - Cheat Trigger")
     end
 end)
