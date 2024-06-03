@@ -64,7 +64,7 @@ function dbombe()
                     else
                         RageUI.Separator(_U('custom_not_possible'))
                     end
-                    RageUI.List("Couleur", ConfigDBP.ColorName, customindex, nil, {}, ouiounon == 1,{
+                    RageUI.List(_U("color"), ConfigDBP.ColorName, customindex, nil, {}, ouiounon == 1,{
                         onListChange = function(index)
                             customindex = index
                             colorselected = ConfigDBP.ColorId[ConfigDBP.ColorName[index]]
