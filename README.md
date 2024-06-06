@@ -4,7 +4,7 @@
 [YouTube Preview](https://www.youtube.com/watch?v=tPqvyMp_VfI)
 ## Download
 
-[Download](https://github.com/DENZEAM/Car-Spray-Paint/releases/tag/fivem)
+[Download](https://github.com/DENZEAM/Car-Spray-Paint/releases)
 
 ## Discord
 [Join our Discord](https://discord.com/invite/onedev)
