@@ -1,6 +1,6 @@
 # One Dev | Car-Spray-Paint
 
-## Preview: [YouTube Preview](https://www.youtube.com/watch?v=_HmCaeVZ3JA)
+## Preview: [YouTube Preview](https://www.youtube.com/watch?v=tPqvyMp_VfI)
 
 - Script that allows you to change the color of a vehicle
 - Script in Rage UI V2
