@@ -31,6 +31,53 @@ dmbombe.Closed = function()
     open = false
 end
 
+function PlaySprayCanAnimation(time)
+    local playerPed = PlayerPedId()
+    local sprayCanDict = "anim@scripted@freemode@postertag@graffiti_spray@male@"
+    local sprayCanAnim = "spray_can_var_01_male"
+    local sprayCanProp = "prop_cs_spray_can"
+    local particleDict = "core"
+    local particleName = "exp_grd_bzgas_smoke"
+
+    -- Charger le dictionnaire d'animation
+    RequestAnimDict(sprayCanDict)
+    while not HasAnimDictLoaded(sprayCanDict) do
+        Citizen.Wait(100)
+    end
+
+    -- Charger le dictionnaire de particules
+    RequestNamedPtfxAsset(particleDict)
+    while not HasNamedPtfxAssetLoaded(particleDict) do
+        Citizen.Wait(100)
+    end
+
+    -- Aligner l'orientation du joueur
+    local heading = GetEntityHeading(playerPed)
+    SetEntityHeading(playerPed, heading)
+
+    -- Jouer l'animation
+    TaskPlayAnim(playerPed, sprayCanDict, sprayCanAnim, 8.0, -8.0, -1, 1, 0, false, false, false)
+
+    -- Attacher le prop de la bombe de peinture au joueur
+    local x, y, z = table.unpack(GetEntityCoords(playerPed))
+    local prop = CreateObject(GetHashKey(sprayCanProp), x, y, z + 0.2, true, true, true)
+    AttachEntityToEntity(prop, playerPed, GetPedBoneIndex(playerPed, 28422), 0.0, 0.0, 0.0700, 0.0017365, 0.0, 0.0, true,
+        true, false, true, 1, true)
+
+    -- Commencer l'effet de particules
+    UseParticleFxAssetNextCall(particleDict)
+    local particleEffect = StartNetworkedParticleFxLoopedOnEntityBone(particleName, playerPed, 0.0, 0.0, 0.0, 0.0, 90.0,
+        0.0,
+        GetEntityBoneIndexByName(prop, "spray"), 1.4, false, false, false)
+
+    Citizen.Wait(time * 1000) -- Durée de l'animation
+
+    -- Arrêter l'effet de particules et l'animation, et supprimer l'objet après le temps spécifié
+    StopParticleFxLooped(particleEffect, 0)
+    ClearPedTasks(playerPed)
+    DeleteObject(prop)
+end
+
 function dbombe()
     if open then
         open = false
@@ -134,9 +181,7 @@ end)
 function vehiclemodif(vehicle, color1, color2)
     TriggerServerEvent("DEN:RemoveItem")
     AddProgressBar(_U('action_in_progress'), 42, 37, 40, 0.74, ConfigDBP.Time * 1000)
-    TaskStartScenarioInPlace(PlayerPedId(), 'CODE_HUMAN_MEDIC_KNEEL', -1, false)
-    Wait(ConfigDBP.Time * 1000)
-    ClearPedTasks(PlayerPedId())
+    PlaySprayCanAnimation(ConfigDBP.Time)
     ESX.Game.SetVehicleProperties(vehicle, {
         color1 = color1,
         color2 = color2
