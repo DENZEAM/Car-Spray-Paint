@@ -1,7 +1,15 @@
 # One Dev | Car-Spray-Paint
 
-## Preview: [YouTube Preview](https://www.youtube.com/watch?v=tPqvyMp_VfI)
+## Preview: 
+[YouTube Preview](https://www.youtube.com/watch?v=tPqvyMp_VfI)
+## Download
 
+[Download](https://github.com/DENZEAM/Car-Spray-Paint/releases/tag/fivem)
+
+## Discord
+[Join our Discord](https://discord.com/invite/onedev)
+
+##
 - Script that allows you to change the color of a vehicle
 - Script in Rage UI V2
 - Fully configurable script
